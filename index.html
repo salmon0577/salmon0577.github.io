@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salmonのoffcial website </title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-overlay"></div>
+
+    <nav class="top-nav">
+        <button id="gear-btn" class="nav-item">⚙️ My Gear</button>
+        <button id="lang-btn" class="nav-item">🌐 <span>中文</span></button>
+        <button id="theme-btn" class="nav-item">🌙</button>
+    </nav>
+
+    <div class="container">
+        
+        <div class="profile">
+            <img src="IMG_0898.jpg" alt="トープ絵" class="avatar">
+            <h1>サーモン</h1>
+            <p class="bio" data-tag="bio">楽しんで生きる。自由に生きるために生まれた。</p>
+        </div>
+
+        <div class="links-grid">
+            
+            <a href="https://blog.salmonn.co.uk" target="_blank" class="card-link main-blog">
+                <span class="icon">📝</span>
+                <span class="text" data-tag="blog_main">最新文章 (Blogger)</span>
+                <span class="sub-text" data-tag="blog_main_desc">My daily updates and sharing</span>
+            </a>
+
+            <a href="http://salmon.data.blog/" target="_blank" class="card-link old-blog">
+                <span class="icon">💾</span>
+                <span class="text" data-tag="blog_old">備用blog (WordPress)</span>
+                <span class="sub-text" data-tag="blog_old_desc">Old articles and other posts</span>
+            </a>
+
+            <a href="https://github.com/salmon0577" target="_blank" class="card-link social">
+                <span class="icon">💻</span>
+                <span class="text" data-tag="github">GitHub / 關於我</span>
+                <span class="sub-text" data-tag="github_desc">About me</span>
+            </a>
+
+        </div>
+
+        <div class="footer">
+            <p>© 2025 salmonn0577. All Rights Reserved.</p>
+        </div>
+
+    </div>
+
+    <div id="gear-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 data-tag="gear_title">My Gear</h2>
+            <div class="gear-list">
+                <div class="gear-item">
+                    <strong>⌨️ Keyboard:</strong> Akko Monsgeek Fun60 Max
+                </div>
+                <div class="gear-item">
+                    <strong>🖱️ Mouse:</strong> Logitech G102
+                </div>
+                <div class="gear-item">
+                    <strong>📱 Phone:</strong> Google Pixel 6 (JP Ver.)/ iPhone 12 (HK ver.)
+                </div>
+                <div class="gear-item">
+                    <strong>🖥️ Server:</strong> Planning... (VPS)
+                </div>
+                <div class="gear-item">
+                    <strong>💻 Personal computer:</strong> 
+                    <br/>
+                    CPU: Intel Xeon E3-1230 V2
+                    <br/>
+                    Graphics: NVIDIA GT 1030 2GB
+                    <br/>
+                    RAM: 16GB
+                    <br/>
+                    Display: ViewSonic VS20562 120Hz
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

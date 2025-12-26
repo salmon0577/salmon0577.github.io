@@ -1,0 +1,232 @@
+/* 定義全局變數 (預設淺色模式) */
+:root {
+    --bg-overlay: rgba(255, 255, 255, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333;
+    --heading-color: #2c3e50;
+    --bio-color: #7f8c8d;
+    --btn-bg: #fff;
+    --btn-border: #f0f0f0;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* 深色模式變數 (當 body 有 .dark-mode class 時生效) */
+body.dark-mode {
+    --bg-overlay: rgba(0, 0, 0, 0.6); /* 背景變暗 */
+    --card-bg: rgba(30, 30, 30, 0.9); /* 卡片變深灰 */
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --bio-color: #aaa;
+    --btn-bg: #2d2d2d;
+    --btn-border: #444;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* 全局重置，讓不同瀏覽器顯示一致 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google 字體 */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('bg.jpg'); /* 背景圖片 */
+    background-size: cover;
+    background-position: center;
+    color: var(--text-color); /* 改用變數了*/
+    transition: color 0.3s ease;
+}
+
+/* 增加一個半透明背景遮罩，讓文字更清晰 */
+.background-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-overlay); /* 改用變數了 */
+    z-index: -1;
+    backdrop-filter: blur(5px); /* 背景模糊效果 */
+    transition: background 0.3s ease;
+}
+
+/* 中間的大卡片 */
+.container {
+    background: var(--card-bg); /* 改變數了 */
+    width: 90%;
+    max-width: 500px; /* 最大寬度，手機上會自動變窄 */
+    padding: 40px;
+    border-radius: 30px; /* 圓角 */
+    box-shadow: 0 10px 40px var(--shadow); /* 陰影 改變數了*/
+    text-align: center;
+    animation: fadeIn 1s ease; /* 進場動畫 */
+    transition: background 0.3s ease;
+}
+
+/* 頭像樣式 */
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* 變圓形 */
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 無顏色變量變動 */
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+
+.avatar:hover {
+    transform: rotate(10deg) scale(1.05); /* 鼠標放上去會旋轉放大 */
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--heading-color); /* 改變量了*/
+}
+
+.bio {
+    color: var(--bio-color); /* 改變量了*/
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* 按鈕網格佈局 */
+.links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 按鈕之間的間距 */
+}
+
+/* 按鈕通用樣式 */
+.card-link {
+    display: flex; /* 讓圖標和文字橫向排列 */
+    align-items: center;
+    background: var(--btn-bg); /* 改變量了*/
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--text-color); /* 改變量了*/
+    border: 2px solid var(--btn-border); /* 改變量了*/
+    transition: all 0.3s ease; /* 動畫過渡時間 */
+    margin-bottom: 15px; /* 補回間距 */
+    
+    /* " position: relative;
+    overflow: hidden; " 原代碼備份 */
+}
+
+/* 按鈕裡的文字排版 */
+.card-link .text {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-left: 15px;
+    flex-grow: 1; /* 讓文字佔據剩餘空間 */
+    text-align: left;
+}
+
+.card-link .icon {
+    font-size: 1.5rem;
+}
+
+.card-link .sub-text {
+    display: block;
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+/* 針對特定按鈕的顏色定製 (模仿 Natorisana 的多彩感) */
+
+/* Blogger 按鈕：主打色 */
+.main-blog:hover {
+    border-color: #ff9a9e;
+    background: #fff0f1;
+    transform: translateY(-5px); /* 向上浮動 */
+    box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+}
+
+/* 舊博客按鈕：復古色 */
+.old-blog:hover {
+    border-color: #a1c4fd;
+    background: #f0f8ff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(161, 196, 253, 0.4);
+}
+
+/* 社交按鈕 */
+.social:hover {
+    border-color: #e0e0e0;
+    background: #fafafa;
+    transform: translateY(-5px);
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* 進場動畫定義 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 第二版新增：頂部選單樣式  */
+.top-nav {
+    position: fixed; top: 20px; right: 20px;
+    display: flex; gap: 10px;
+    z-index: 100;
+}
+
+.nav-item {
+    background: var(--card-bg);
+    border: 1px solid var(--btn-border);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.nav-item:hover { transform: scale(1.05); }
+
+/* 第二版新增：My Gear 彈出視窗樣式 */
+.modal {
+    display: none; /* 預設隱藏 */
+    position: fixed; z-index: 200;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5); /* 黑色半透明背景 */
+    backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%; max-width: 400px;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s;
+    text-align: left;
+}
+
+.close-btn {
+    position: absolute; top: 10px; right: 20px;
+    font-size: 28px; font-weight: bold; cursor: pointer;
+    color: var(--bio-color);
+}
+.close-btn:hover { color: #ff9a9e; }
+
+.gear-item {
+    margin: 15px 0;
+    border-bottom: 1px solid var(--btn-border);
+    padding-bottom: 10px;
+}
