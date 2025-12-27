@@ -137,7 +137,7 @@ h1 {
     margin-top: 4px;
 }
 
-/* 針對特定按鈕的顏色定製 (模仿 Natorisana 的多彩感) */
+/* 針對特定按鈕的顏色定製 */
 
 /* Blogger 按鈕：主打色 */
 .main-blog:hover {
@@ -229,4 +229,5 @@ h1 {
     margin: 15px 0;
     border-bottom: 1px solid var(--btn-border);
     padding-bottom: 10px;
+
 }
