@@ -229,10 +229,9 @@ h1 {
     margin: 15px 0;
     border-bottom: 1px solid var(--btn-border);
     padding-bottom: 10px;
-
 }
 
-* 12.28新增功能：anime list */
+/* 12.28新增功能：anime list */
 
 /* 定位與容器 */
 #moe-mascot-container {
