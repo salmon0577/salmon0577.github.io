@@ -18,11 +18,11 @@ window.onclick = function(event) {
     }
 }
 
-// --- 2.深色模式邏輯 ---
+// --- 2. 深色模式邏輯 ---
 const themeBtn = document.getElementById("theme-btn");
 const body = document.body;
 
-// 檢查user之前的偏好
+// 檢查使用者之前的偏好
 if (localStorage.getItem("theme") === "dark") {
     body.classList.add("dark-mode");
     themeBtn.textContent = "☀️";
@@ -63,7 +63,7 @@ const translations = {
         bio: "楽しんで生きる。自由に生きるために生まれた。",
         blog_main: "最新記事 (Blogger)",
         blog_main_desc: "日常の更新とシェア",
-        blog_old: "予備のブログ (WordPress)",
+        blog_old: "予備ブログ (WordPress)",
         blog_old_desc: "過去の記事アーカイブ",
         github: "GitHub / 私について",
         github_desc: "自己紹介 & 連絡先",
@@ -84,7 +84,7 @@ const translations = {
 };
 
 langBtn.onclick = function() {
-    // 切換語言：中 -> 日 -> 英 -> 中
+    // 循環切換語言：中 -> 日 -> 英 -> 中
     if (currentLang === "zh") {
         currentLang = "jp";
     } else if (currentLang === "jp") {
@@ -110,10 +110,11 @@ function updateLanguage(lang) {
         }
     });
 }
+
 // -- 4. 12.28 新增功能：anime list --
 
 // 1. 基本設定
-const ANILIST_USERNAME = 'salmon0577'; // <-- 務必改為你的帳號名
+const ANILIST_USERNAME = 'salmon0577'; //
 
 // 2. 定義 Query (這就是你漏掉的天線！)
 const query = `
@@ -220,6 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 10000);
 });
 
-// 初始化
-
+// 初始化：如果是預設日文，可以這裡先呼叫 updateLanguage('jp');
+// 根據你的原始碼，預設是日文標題配中文描述，建議這裡統一初始化：
 updateLanguage('zh');
