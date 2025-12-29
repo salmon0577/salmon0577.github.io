@@ -110,6 +110,116 @@ function updateLanguage(lang) {
         }
     });
 }
+// -- 4. 12.28 新增功能：anime list --
+
+// 1. 基本設定
+const ANILIST_USERNAME = 'salmon0577'; // <-- 務必改為你的帳號名
+
+// 2. 定義 Query (這就是你漏掉的天線！)
+const query = `
+query ($username: String) {
+  MediaListCollection(userName: $username, type: ANIME, status: CURRENT) {
+    lists {
+      entries {
+        media {
+          title {
+            native
+            romaji
+          }
+          coverImage {
+            large
+          }
+          siteUrl
+        }
+        progress
+      }
+    }
+  }
+}
+`;
+
+// 3. 狀態對話設定 (妖夢風格)
+const messages = {
+  idle: ["半人半靈的庭師，魂魄妖夢，參上！", "你要看我的追番表嗎？", "今天的修行也完成了！", "斬不斷的東西...幾乎不存在！"],
+  open: ["嘿嘿，這就是我最近在看的！", "有沒有跟你重複的番？", "這些都超好看的喔！"],
+  close: ["縮回去休息囉～", "晚點再來找我玩！"]
+};
+
+const bubble = document.getElementById('moe-bubble');
+const panel = document.getElementById('anime-list-panel');
+
+// 隨機更換對話函式
+function updateBubble(type) {
+  const list = messages[type];
+  const text = list[Math.floor(Math.random() * list.length)];
+  if(bubble) bubble.innerText = text;
+}
+
+// 4. 切換面板邏輯
+function toggleAnimeList() {
+  
+  const isHidden = panel.classList.toggle('hidden');
+    updateBubble(isHidden ? 'close' : 'open');
+        if (isHidden) {
+      setTimeout(() => updateBubble('idle'), 3000);
+    } else {
+    // 每次打開時重新抓取一次資料，保持最新狀態
+    fetchAniList();
+  }
+}
+
+// 5. 抓取 AniList 資料的函式
+function fetchAniList() {
+  fetch('https://graphql.anilist.co', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    },
+    body: JSON.stringify({
+      query: query,
+      variables: { username: ANILIST_USERNAME }
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    const entries = data.data.MediaListCollection.lists[0]?.entries || [];
+    const contentArea = document.getElementById('anime-api-content');
+    
+    if (entries.length === 0) {
+      contentArea.innerHTML = '<p style="font-size:12px;">目前清單是空的喔～</p>';
+      return;
+    }
+
+    // 渲染清單
+    contentArea.innerHTML = entries.map(entry => `
+      <div class="anime-entry" style="display: flex; align-items: center; margin-bottom: 10px;">
+        <a href="${entry.media.siteUrl}" target="_blank" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
+          <img src="${entry.media.coverImage.large}" style="width: 40px; height: 55px; border-radius: 4px; margin-right: 10px; object-fit: cover;">
+          <div style="overflow: hidden;">
+            <div class="anime-title" style="font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 160px;">
+              ${entry.media.title.native}
+            </div>
+            <div style="font-size: 10px; color: #ff66b2;">看到第 ${entry.progress} 集</div>
+          </div>
+        </a>
+      </div>
+    `).join('');
+  })
+  .catch(err => {
+    console.error('AniList 抓取失敗:', err);
+    document.getElementById('anime-api-content').innerHTML = '<p>資料讀取失敗...</p>';
+  });
+}
+
+// 6. 初始化
+document.addEventListener('DOMContentLoaded', () => {
+  fetchAniList(); // 頁面載入先抓一次
+  setInterval(() => {
+    if (panel.classList.contains('hidden')) updateBubble('idle');
+  }, 10000);
+});
 
 // 初始化
+
 updateLanguage('zh');
