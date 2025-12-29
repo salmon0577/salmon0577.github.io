@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salmonnのoffcial website </title>
-    <link href="icon.png" rel="icon" type="image/png">
+    <title>Salmonのoffcial website </title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -45,7 +44,7 @@
                 <span class="text" data-tag="github">GitHub / 關於我</span>
                 <span class="sub-text" data-tag="github_desc">About me</span>
             </a>
-            
+
         </div>
         <!-- 12.28 新增功能：anime list -->
         <div id="moe-mascot-container">
@@ -58,14 +57,14 @@
             <div id="anime-list-panel" class="hidden">
                 <div class="panel-header">
                     <span>正在追的番組</span>
-                    <button onclick="toggleAnimeList()" class="close-btn">x</button>
+                    <button class="close-btn" onclick="toggleAnimeList()">&times;</button>
                 </div>
                 <div id="anime-api-content">
                     <p style="font-size:12px; color:#999;">正在連線到 AniList...</p>
                 </div>
             </div>
         </div>
-        
+
         <div class="footer">
             <p>© 2025 salmonn0577. All Rights Reserved.</p>
         </div>
@@ -74,7 +73,7 @@
 
     <div id="gear-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn">&times;</span>
+            <span class="close-btn" onclick="closeGearModal()">&times;</span>
             <h2 data-tag="gear_title">My Gear</h2>
             <div class="gear-list">
                 <div class="gear-item">
@@ -106,6 +105,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
-
