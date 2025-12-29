@@ -231,3 +231,102 @@ h1 {
     padding-bottom: 10px;
 
 }
+
+* 12.28新增功能：anime list */
+
+/* 定位與容器 */
+#moe-mascot-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: "Microsoft JhengHei", sans-serif;
+}
+
+/* 圓形或透明背景的頭像 */
+#moe-avatar {
+  width: 80px; /* GIF 可以稍微大一點 */
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#moe-avatar:hover { transform: scale(1.1); }
+#moe-avatar img { width: 100%; height: auto; }
+
+/* 對話氣泡樣式 */
+#moe-bubble {
+  background: white;
+  padding: 8px 15px;
+  border-radius: 18px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid #ff66b2;
+  position: relative;
+  max-width: 180px;
+  color: #555;
+  pointer-events: none; /* 防止氣泡擋住點擊 */
+  transition: opacity 0.3s;
+}
+
+/* 氣泡的小尾巴 */
+#moe-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #ff66b2 transparent;
+}
+
+/* 清單面板樣式 */
+#anime-list-panel {
+  position: absolute;
+  bottom: 100px;
+  right: 0;
+  width: 260px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 15px;
+  border: 1px solid #eee;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.hidden { opacity: 0; transform: translateY(30px) scale(0.9); pointer-events: none; }
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #ff66b2;
+  font-size: 14px;
+}
+
+/* 看板娘叉叉 */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px; /* 放大一點比較好點 */
+  cursor: pointer;
+  color: #ccc;
+  line-height: 1;  /* 確保高度不會跑掉 */
+  padding: 5px;    /* 增加點擊區域 */
+  transition: color 0.2s;
+  z-index: 1001;   /* 確保它在面板的最上層 */
+}
+
+.close-btn:hover {
+  color: #ff66b2;  /* 滑鼠移上去變粉紅色 */
+}
+
+/* API 內容微調 */
+.anime-entry { display: flex; align-items: center; margin-bottom: 10px; }
+.anime-entry img { width: 40px; height: 55px; border-radius: 4px; margin-right: 10px; object-fit: cover; }
+.anime-title { font-size: 12px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
