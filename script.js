@@ -1,10 +1,3 @@
-/**
- * salmon0577 12.28 修正版
- * 修復項目：
- * 1. 獨立化 Gear 與 Anime List 的關閉邏輯，避免 close-btn 衝突。
- * 2. 優化 DOM 抓取，改用 ID 導向，確保按鈕反應。
- */
-
 // --- 1. My Gear 彈窗邏輯 ---
 const gearModal = document.getElementById("gear-modal");
 const gearBtn = document.getElementById("gear-btn");
@@ -75,7 +68,35 @@ function updateLanguage(lang) {
 
 // --- 4. Anime List & 看板娘邏輯 ---
 const ANILIST_USERNAME = 'salmon0577';
-const query = `query ($username: String) { MediaListCollection(userName: $username, type: ANIME, status: CURRENT) { lists { entries { media { title { native romaji } coverImage { large } siteUrl } progress } } } }`;
+const query = `
+query ($username: String) {
+  anime: MediaListCollection(userName: $username, type: ANIME, status: CURRENT) {
+    lists {
+      entries {
+        media {
+          title { native romaji }
+          coverImage { large }
+          siteUrl
+        }
+        progress
+      }
+    }
+  }
+  manga: MediaListCollection(userName: $username, type: MANGA, status: CURRENT) {
+    lists {
+      entries {
+        media {
+          title { native romaji }
+          coverImage { large }
+          siteUrl
+        }
+        progress
+        progressVolumes
+      }
+    }
+  }
+}
+`;
 
 const messages = {
     idle: ["半人半靈的庭師，魂魄妖夢，參上！", "你要看我的追番表嗎？", "今天的修行也完成了！", "斬不斷的東西...幾乎不存在！"],
@@ -100,9 +121,50 @@ function toggleAnimeList() {
     else fetchAniList();
 }
 
+function renderList(title, entries, color, isManga = false) {
+    if (!entries || entries.length === 0) return '';
+
+    const listHTML = entries.map(entry => {
+        
+        let progressText = `看到第 ${entry.progress || 0} 集`;
+        
+        // 如果是漫畫 (isManga 為 true)，優先顯示卷數
+        if (isManga) {
+            if (entry.progressVolumes > 0) {
+                progressText = `看到第 ${entry.progressVolumes} 卷`;
+                // 同時顯示話數
+                if (entry.progress > 0) progressText += ` (${entry.progress} 話)`;
+            } else {
+                progressText = `看到第 ${entry.progress || 0} 話`;
+            }
+        }
+        // -----------------------
+
+        return `
+        <div class="anime-entry" style="display: flex; align-items: center; margin-bottom: 10px;">
+            <a href="${entry.media.siteUrl}" target="_blank" style="text-decoration: none; display: flex; align-items: center; color: inherit; width: 100%;">
+                <img src="${entry.media.coverImage.large}" style="width: 40px; height: 55px; border-radius: 4px; margin-right: 10px; object-fit: cover;">
+                <div style="overflow: hidden; flex: 1;">
+                    <div style="font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${entry.media.title.native}</div>
+                    <div style="font-size: 10px; color: ${color};">${progressText}</div>
+                </div>
+            </a>
+        </div>
+        `;
+    }).join('');
+
+    return `
+        <div style="margin-top: 15px; margin-bottom: 5px; font-size: 12px; color: #888; border-bottom: 1px solid #eee; padding-bottom: 2px;">${title}</div>
+        <div>${listHTML}</div>
+    `;
+}
+
 function fetchAniList() {
     const contentArea = document.getElementById('anime-api-content');
     if (!contentArea) return;
+
+    // 顯示載入中
+    contentArea.innerHTML = '<p style="font-size:12px; color:#999; text-align:center;">載入清單中...</p>';
 
     fetch('https://graphql.anilist.co', {
         method: 'POST',
@@ -111,22 +173,22 @@ function fetchAniList() {
     })
     .then(res => res.json())
     .then(data => {
-        const entries = data.data.MediaListCollection.lists[0]?.entries || [];
-        if (entries.length === 0) {
+        // 分別抓取動畫和漫畫的資料
+        const animeEntries = data.data.anime.lists[0]?.entries || [];
+        const mangaEntries = data.data.manga.lists[0]?.entries || [];
+
+        if (animeEntries.length === 0 && mangaEntries.length === 0) {
             contentArea.innerHTML = '<p style="font-size:12px;">目前清單是空的喔～</p>';
             return;
         }
-        contentArea.innerHTML = entries.map(entry => `
-            <div class="anime-entry" style="display: flex; align-items: center; margin-bottom: 10px;">
-                <a href="${entry.media.siteUrl}" target="_blank" style="text-decoration: none; display: flex; align-items: center; color: inherit;">
-                    <img src="${entry.media.coverImage.large}" style="width: 40px; height: 55px; border-radius: 4px; margin-right: 10px; object-fit: cover;">
-                    <div style="overflow: hidden;">
-                        <div style="font-size: 12px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 160px;">${entry.media.title.native}</div>
-                        <div style="font-size: 10px; color: #ff66b2;">看到第 ${entry.progress} 集</div>
-                    </div>
-                </a>
-            </div>
-        `).join('');
+
+        let finalHTML = '';
+        
+        finalHTML += renderList('📺 動畫 (Anime)', animeEntries, '#ff66b2', false); 
+        
+        finalHTML += renderList('📖 漫畫 (Manga)', mangaEntries, '#4dabf7', true);
+
+        contentArea.innerHTML = finalHTML;
     })
     .catch(err => {
         console.error('AniList 抓取失敗:', err);
@@ -154,3 +216,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 10000);
     updateLanguage('zh');
 });
+
