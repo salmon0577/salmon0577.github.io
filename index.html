@@ -6,6 +6,8 @@
     <title>Salmonのoffcial website </title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- marked.js 用於渲染 Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
@@ -19,33 +21,51 @@
 
     <div class="container">
         
-        <div class="profile">
-            <img src="IMG_0898.jpg" alt="トープ絵" class="avatar">
-            <h1>サーモン</h1>
-            <p class="bio" data-tag="bio">楽しんで生きる。自由に生きるために生まれた。</p>
+        <!-- 主頁視圖 -->
+        <div id="main-view">
+            <div class="profile">
+                <img src="IMG_0898.jpg" alt="トープ絵" class="avatar">
+                <h1>サーモン</h1>
+                <p class="bio" data-tag="bio">楽しんで生きる。自由に生きるために生まれた。</p>
+            </div>
+
+            <div class="links-grid">
+                
+                <a href="https://blog.salmonn.co.uk" target="_blank" class="card-link main-blog">
+                    <span class="icon">📝</span>
+                    <span class="text" data-tag="blog_main">最新文章 (Blogger)</span>
+                    <span class="sub-text" data-tag="blog_main_desc">My daily updates and sharing</span>
+                </a>
+
+                <a href="http://salmon.data.blog/" target="_blank" class="card-link old-blog">
+                    <span class="icon">💾</span>
+                    <span class="text" data-tag="blog_old">備用blog (WordPress)</span>
+                    <span class="sub-text" data-tag="blog_old_desc">Old articles and other posts</span>
+                </a>
+
+                <!-- GitHub 按鈕：改為 button，點擊後展示個人簡介 -->
+                <button id="github-btn" class="card-link social" onclick="showGithubBio()">
+                    <span class="icon">💻</span>
+                    <span class="text" data-tag="github">GitHub / 關於我</span>
+                    <span class="sub-text" data-tag="github_desc">About me</span>
+                </button>
+
+            </div>
         </div>
 
-        <div class="links-grid">
-            
-            <a href="https://blog.salmonn.co.uk" target="_blank" class="card-link main-blog">
-                <span class="icon">📝</span>
-                <span class="text" data-tag="blog_main">最新文章 (Blogger)</span>
-                <span class="sub-text" data-tag="blog_main_desc">My daily updates and sharing</span>
-            </a>
-
-            <a href="http://salmon.data.blog/" target="_blank" class="card-link old-blog">
-                <span class="icon">💾</span>
-                <span class="text" data-tag="blog_old">備用blog (WordPress)</span>
-                <span class="sub-text" data-tag="blog_old_desc">Old articles and other posts</span>
-            </a>
-
-            <a href="https://github.com/salmon0577" target="_blank" class="card-link social">
-                <span class="icon">💻</span>
-                <span class="text" data-tag="github">GitHub / 關於我</span>
-                <span class="sub-text" data-tag="github_desc">About me</span>
-            </a>
-
+        <!-- 個人簡介視圖（預設隱藏） -->
+        <div id="bio-view" class="hidden">
+            <div class="bio-header">
+                <button class="back-btn" onclick="hideBio()">← <span data-tag="back_btn">返回</span></button>
+                <a id="github-link" href="https://github.com/salmon0577" target="_blank" class="github-link-btn">
+                    <span>GitHub ↗</span>
+                </a>
+            </div>
+            <div id="bio-content" class="bio-content">
+                <p class="bio-loading">⏳ 載入中...</p>
+            </div>
         </div>
+
         <!-- 12.28 新增功能：anime list -->
         <div id="moe-mascot-container">
             <div id="moe-bubble">載入中...</div>
@@ -108,5 +128,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
