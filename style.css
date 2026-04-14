@@ -330,3 +330,147 @@ h1 {
 .anime-entry img { width: 40px; height: 55px; border-radius: 4px; margin-right: 10px; object-fit: cover; }
 .anime-title { font-size: 12px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+/* 視圖切換動畫 */
+.view-exit {
+    animation: fadeOut 0.2s ease forwards;
+}
+.view-enter {
+    animation: fadeIn 0.4s ease forwards;
+}
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-10px); }
+}
+ 
+/* 個人簡介視圖 */
+#bio-view {
+    width: 100%;
+}
+ 
+/* 頂部列：返回按鈕 + GitHub 連結 */
+.bio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+ 
+.back-btn {
+    background: var(--btn-bg);
+    border: 1.5px solid var(--btn-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+.back-btn:hover {
+    border-color: #ff9a9e;
+    color: #ff9a9e;
+    transform: translateX(-3px);
+}
+ 
+.github-link-btn {
+    background: var(--btn-bg);
+    border: 1.5px solid var(--btn-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+.github-link-btn:hover {
+    border-color: #a1c4fd;
+    color: #378ADD;
+}
+ 
+/* README 內容區塊 */
+.bio-content {
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+ 
+/* Markdown 渲染樣式 */
+.bio-content h1,
+.bio-content h2,
+.bio-content h3 {
+    color: var(--heading-color);
+    margin: 16px 0 8px;
+    font-size: 1.1rem;
+}
+.bio-content h1 { font-size: 1.3rem; }
+ 
+.bio-content p {
+    margin: 8px 0;
+}
+ 
+.bio-content a {
+    color: #378ADD;
+    text-decoration: none;
+}
+.bio-content a:hover {
+    text-decoration: underline;
+}
+ 
+.bio-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 8px 0;
+}
+ 
+.bio-content code {
+    background: var(--btn-border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+ 
+.bio-content pre {
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto;
+    font-size: 0.82em;
+}
+ 
+/* 捲軸樣式 */
+.bio-content::-webkit-scrollbar {
+    width: 4px;
+}
+.bio-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.bio-content::-webkit-scrollbar-thumb {
+    background: var(--btn-border);
+    border-radius: 4px;
+}
+ 
+/* 載入中 / 錯誤訊息 */
+.bio-loading,
+.bio-error {
+    text-align: center;
+    color: var(--bio-color);
+    padding: 30px 0;
+}
+.bio-error a {
+    color: #378ADD;
+}
+ 
+/* hidden class（已存在，確保也包含此項） */
+/* .hidden { opacity: 0; transform: translateY(30px) scale(0.9); pointer-events: none; } */
+/* 原有的 .hidden 是給 anime panel 用的，bio-view 需要 display:none 效果 */
+/* 所以在 JS 中用 classList 的 hidden 配合以下規則 */
+#main-view.hidden,
+#bio-view.hidden {
+    display: none;
+}
+ 
