@@ -39,9 +39,9 @@ const langBtn = document.getElementById("lang-btn");
 let currentLang = "zh";
 
 const translations = {
-    zh: { bio: "楽しんで生きる。自由に生きるために生まれた。", blog_main: "最新文章 (Blogger)", blog_main_desc: "我的日常更新與分享", blog_old: "備用 blog (WordPress)", blog_old_desc: "舊文章存檔與其他文章", github: "GitHub / 關於我", github_desc: "關於我 & 聯絡方式", gear_title: "我的裝備", lang_name: "中文", back_btn: "返回" },
-    jp: { bio: "楽しんで生きる。自由に生きるために生まれた。", blog_main: "最新記事 (Blogger)", blog_main_desc: "日常の更新とシェア", blog_old: "予備ブログ (WordPress)", blog_old_desc: "過去の記事アーカイブ", github: "GitHub / 私について", github_desc: "自己紹介 & 連絡先", gear_title: "使用機材", lang_name: "日本語", back_btn: "戻る" },
-    en: { bio: "Enjoy life. Born to be free.", blog_main: "Latest Posts (Blogger)", blog_main_desc: "Daily updates and sharing", blog_old: "Backup Blog (WordPress)", blog_old_desc: "Old archives", github: "GitHub / About Me", github_desc: "About me & Contact", gear_title: "My Gear", lang_name: "English", back_btn: "Back" }
+    zh: { bio: "楽しんで生きる。自由に生きるために生まれた。", blog_main: "最新文章 (Blogger)", blog_main_desc: "我的日常更新與分享", blog_old: "備用 blog (WordPress)", blog_old_desc: "舊文章存檔與其他文章", github: "關於我", github_desc: "關於我 & 聯絡方式", gear_title: "我的裝備", lang_name: "中文", back_btn: "返回" },
+    jp: { bio: "楽しんで生きる。自由に生きるために生まれた。", blog_main: "最新記事 (Blogger)", blog_main_desc: "日常の更新とシェア", blog_old: "予備ブログ (WordPress)", blog_old_desc: "過去の記事アーカイブ", github: "私について", github_desc: "自己紹介 & 連絡先", gear_title: "使用機材", lang_name: "日本語", back_btn: "戻る" },
+    en: { bio: "Enjoy life. Born to be free.", blog_main: "Latest Posts (Blogger)", blog_main_desc: "Daily updates and sharing", blog_old: "Backup Blog (WordPress)", blog_old_desc: "Old archives", github: "About Me", github_desc: "About me & Contact", gear_title: "My Gear", lang_name: "English", back_btn: "Back" }
 };
 
 if (langBtn) {
