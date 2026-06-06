@@ -308,24 +308,26 @@ function renderPosts(data) {
         const summary =
             post.summary?.$t || "";
 
-        container.innerHTML += `
-            <div class="post-card">
+    container.innerHTML += `
+    <a href="${link}"
+       target="_blank"
+       class="card-link post-card">
 
-                <h3>${title}</h3>
+        <span class="icon">📝</span>
 
-                <p>
-                    ${summary
-                        .replace(/<[^>]+>/g,'')
-                        .slice(0,120)}
-                </p>
+        <div style="flex:1; text-align:left;">
 
-                <a href="${link}"
-                   target="_blank">
-
-                    閱讀全文 →
-                </a>
-
+            <div class="text">
+                ${title}
             </div>
-        `;
-    });
-}
+
+            <div class="sub-text">
+                ${summary
+                    .replace(/<[^>]+>/g,'')
+                    .slice(0,120)}
+            </div>
+
+        </div>
+
+    </a>
+    `;
