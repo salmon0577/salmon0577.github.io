@@ -28,39 +28,21 @@
                 <h1>サーモン</h1>
                 <p class="bio" data-tag="bio">楽しんで生きる。自由に生きるために生まれた。</p>
             </div>
-        </div>
 
-        <div id="blog-view" class="hidden">
-
-                <div class="bio-header">
-                    <button class="back-btn"
-                            onclick="hideBlog()">
-                        ← 返回
-                    </button>
-                </div>
-        
-                <div id="blog-posts">
-                    載入文章中...
-                </div>
-
-        </div>
             <div class="links-grid">
                 
-        <button id="blog-btn"
-            class="card-link main-blog"
-            onclick="showBlog()">
-                <span class="icon">📝</span>
-                <span class="text">最新文章</span>
-                <span class="sub-text">My daily updates and sharing</span>
-        </button>
+                <a href="https://blog.salmonn.co.uk" target="_blank" class="card-link main-blog">
+                    <span class="icon">📝</span>
+                    <span class="text" data-tag="blog_main">最新文章 (Blogger)</span>
+                    <span class="sub-text" data-tag="blog_main_desc">My daily updates and sharing</span>
+                </a>
 
-                <!--
                 <a href="http://salmon.data.blog/" target="_blank" class="card-link old-blog">
                     <span class="icon">💾</span>
                     <span class="text" data-tag="blog_old">備用blog (WordPress)</span>
                     <span class="sub-text" data-tag="blog_old_desc">Old articles and other posts</span>
                 </a>
-                -->
+
                 <!-- GitHub 按鈕：改為 button，點擊後展示個人簡介 -->
                 <button id="github-btn" class="card-link social" onclick="showGithubBio()">
                     <span class="icon">💻</span>

@@ -470,30 +470,7 @@ h1 {
 /* 原有的 .hidden 是給 anime panel 用的，bio-view 需要 display:none 效果 */
 /* 所以在 JS 中用 classList 的 hidden 配合以下規則 */
 #main-view.hidden,
-#bio-view.hidden,
-#blog-view.hidden {
+#bio-view.hidden {
     display: none;
 }
-
-/* blog view */
-#blog-view {
-    width: 100%;
-}
-
-#blog-posts {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.post-card {
-    margin-bottom: 0;
-}
-
-.post-card .sub-text {
-    margin-top: 8px;
-    line-height: 1.5;
-}
-#blog-view.hidden {
-    display: none;
-}
+ 
