@@ -1,0 +1,476 @@
+/* 定義全局變數 (預設淺色模式) */
+:root {
+    --bg-overlay: rgba(255, 255, 255, 0.3);
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-color: #333;
+    --heading-color: #2c3e50;
+    --bio-color: #7f8c8d;
+    --btn-bg: #fff;
+    --btn-border: #f0f0f0;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* 深色模式變數 */
+body.dark-mode {
+    --bg-overlay: rgba(0, 0, 0, 0.6); /* 背景變暗 */
+    --card-bg: rgba(30, 30, 30, 0.9); /* 卡片變深灰 */
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --bio-color: #aaa;
+    --btn-bg: #2d2d2d;
+    --btn-border: #444;
+    --shadow: rgba(0, 0, 0, 0.5);
+}
+
+/* 全局重置，讓不同瀏覽器顯示一致 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans TC', sans-serif; /* 使用 Google 字體 */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('bg.jpg'); /* 背景圖片 */
+    background-size: cover;
+    background-position: center;
+    color: var(--text-color); /* 改用變數了*/
+    transition: color 0.3s ease;
+}
+
+/* 增加一個半透明背景遮罩，讓文字更清晰 */
+.background-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--bg-overlay); /* 改用變數了 */
+    z-index: -1;
+    backdrop-filter: blur(5px); /* 背景模糊效果 */
+    transition: background 0.3s ease;
+}
+
+/* 中間的大卡片 */
+.container {
+    background: var(--card-bg); /* 改變數了 */
+    width: 90%;
+    max-width: 500px; /* 最大寬度，手機上會自動變窄 */
+    padding: 40px;
+    border-radius: 30px; /* 圓角 */
+    box-shadow: 0 10px 40px var(--shadow); /* 陰影 改變數了*/
+    text-align: center;
+    animation: fadeIn 1s ease; /* 進場動畫 */
+    transition: background 0.3s ease;
+}
+
+/* 頭像樣式 */
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%; /* 變圓形 */
+    border: 4px solid #fff;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* 無顏色變量變動 */
+    margin-bottom: 15px;
+    transition: transform 0.3s;
+}
+
+.avatar:hover {
+    transform: rotate(10deg) scale(1.05); /* 鼠標放上去會旋轉放大 */
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--heading-color); /* 改變量了*/
+}
+
+.bio {
+    color: var(--bio-color); /* 改變量了*/
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+}
+
+/* 按鈕網格佈局 */
+.links-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 按鈕之間的間距 */
+}
+
+/* 按鈕通用樣式 */
+.card-link {
+    display: flex; /* 讓圖標和文字橫向排列 */
+    align-items: center;
+    background: var(--btn-bg); /* 改變量了*/
+    padding: 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    color: var(--text-color); /* 改變量了*/
+    border: 2px solid var(--btn-border); /* 改變量了*/
+    transition: all 0.3s ease; /* 動畫過渡時間 */
+    margin-bottom: 15px; /* 補回間距 */
+    
+    /* " position: relative;
+    overflow: hidden; " 原代碼備份 */
+}
+
+/* 按鈕裡的文字排版 */
+.card-link .text {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-left: 15px;
+    flex-grow: 1; /* 讓文字佔據剩餘空間 */
+    text-align: left;
+}
+
+.card-link .icon {
+    font-size: 1.5rem;
+}
+
+.card-link .sub-text {
+    display: block;
+    font-size: 0.75rem;
+    color: #999;
+    font-weight: normal;
+    margin-top: 4px;
+}
+
+/* 針對特定按鈕的顏色定製 */
+
+/* Blogger 按鈕：主打色 */
+.main-blog:hover {
+    border-color: #ff9a9e;
+    background: #fff0f1;
+    transform: translateY(-5px); /* 向上浮動 */
+    box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+}
+
+/* 舊博客按鈕：復古色 */
+.old-blog:hover {
+    border-color: #a1c4fd;
+    background: #f0f8ff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(161, 196, 253, 0.4);
+}
+
+/* 社交按鈕 */
+.social:hover {
+    border-color: #e0e0e0;
+    background: #fafafa;
+    transform: translateY(-5px);
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+/* 進場動畫定義 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 第二版新增：頂部選單樣式  */
+.top-nav {
+    position: fixed; top: 20px; right: 20px;
+    display: flex; gap: 10px;
+    z-index: 100;
+}
+
+.nav-item {
+    background: var(--card-bg);
+    border: 1px solid var(--btn-border);
+    color: var(--text-color);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    backdrop-filter: blur(5px);
+}
+
+.nav-item:hover { transform: scale(1.05); }
+
+/* 第二版新增：My Gear 彈出視窗樣式 */
+.modal {
+    display: none; /* 預設隱藏 */
+    position: fixed; z-index: 200;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5); /* 黑色半透明背景 */
+    backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 30px;
+    border-radius: 20px;
+    width: 80%; max-width: 400px;
+    position: relative;
+    box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s;
+    text-align: left;
+}
+
+.close-btn {
+    position: absolute; top: 10px; right: 20px;
+    font-size: 28px; font-weight: bold; cursor: pointer;
+    color: var(--bio-color);
+}
+.close-btn:hover { color: #ff9a9e; }
+
+.gear-item {
+    margin: 15px 0;
+    border-bottom: 1px solid var(--btn-border);
+    padding-bottom: 10px;
+}
+
+/* 12.28新增功能：anime list */
+
+/* 定位與容器 */
+#moe-mascot-container {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-family: "Microsoft JhengHei", sans-serif;
+}
+
+/* 圓形或透明背景的頭像 */
+#moe-avatar {
+  width: 80px; /* GIF 可以稍微大一點 */
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+#moe-avatar:hover { transform: scale(1.1); }
+#moe-avatar img { width: 100%; height: auto; }
+
+/* 對話氣泡樣式 */
+#moe-bubble {
+  background: white;
+  padding: 8px 15px;
+  border-radius: 18px;
+  font-size: 13px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid #ff66b2;
+  position: relative;
+  max-width: 180px;
+  color: #555;
+  pointer-events: none; /* 防止氣泡擋住點擊 */
+  transition: opacity 0.3s;
+}
+
+/* 氣泡的小尾巴 */
+#moe-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 20px;
+  border-width: 10px 10px 0;
+  border-style: solid;
+  border-color: #ff66b2 transparent;
+}
+
+/* 清單面板樣式 */
+#anime-list-panel {
+  position: absolute;
+  bottom: 100px;
+  right: 0;
+  width: 260px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  padding: 15px;
+  border: 1px solid #eee;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+}
+
+.hidden { opacity: 0; transform: translateY(30px) scale(0.9); pointer-events: none; }
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #ff66b2;
+  font-size: 14px;
+}
+
+/* 看板娘叉叉 */
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ccc;
+  line-height: 1;
+  padding: 5px;
+  transition: color 0.2s;
+  z-index: 1001;
+}
+
+.close-btn:hover {
+  color: #ff66b2;  /* 滑鼠移上去變粉紅色 */
+}
+
+/* API 內容微調 */
+.anime-entry { display: flex; align-items: center; margin-bottom: 10px; }
+.anime-entry img { width: 40px; height: 55px; border-radius: 4px; margin-right: 10px; object-fit: cover; }
+.anime-title { font-size: 12px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* 視圖切換動畫 */
+.view-exit {
+    animation: fadeOut 0.2s ease forwards;
+}
+.view-enter {
+    animation: fadeIn 0.4s ease forwards;
+}
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to   { opacity: 0; transform: translateY(-10px); }
+}
+ 
+/* 個人簡介視圖 */
+#bio-view {
+    width: 100%;
+}
+ 
+/* 頂部列：返回按鈕 + GitHub 連結 */
+.bio-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+ 
+.back-btn {
+    background: var(--btn-bg);
+    border: 1.5px solid var(--btn-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+.back-btn:hover {
+    border-color: #ff9a9e;
+    color: #ff9a9e;
+    transform: translateX(-3px);
+}
+ 
+.github-link-btn {
+    background: var(--btn-bg);
+    border: 1.5px solid var(--btn-border);
+    color: var(--text-color);
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+.github-link-btn:hover {
+    border-color: #a1c4fd;
+    color: #378ADD;
+}
+ 
+/* README 內容區塊 */
+.bio-content {
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-color);
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+ 
+/* Markdown 渲染樣式 */
+.bio-content h1,
+.bio-content h2,
+.bio-content h3 {
+    color: var(--heading-color);
+    margin: 16px 0 8px;
+    font-size: 1.1rem;
+}
+.bio-content h1 { font-size: 1.3rem; }
+ 
+.bio-content p {
+    margin: 8px 0;
+}
+ 
+.bio-content a {
+    color: #378ADD;
+    text-decoration: none;
+}
+.bio-content a:hover {
+    text-decoration: underline;
+}
+ 
+.bio-content img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 8px 0;
+}
+ 
+.bio-content code {
+    background: var(--btn-border);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+ 
+.bio-content pre {
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto;
+    font-size: 0.82em;
+}
+ 
+/* 捲軸樣式 */
+.bio-content::-webkit-scrollbar {
+    width: 4px;
+}
+.bio-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+.bio-content::-webkit-scrollbar-thumb {
+    background: var(--btn-border);
+    border-radius: 4px;
+}
+ 
+/* 載入中 / 錯誤訊息 */
+.bio-loading,
+.bio-error {
+    text-align: center;
+    color: var(--bio-color);
+    padding: 30px 0;
+}
+.bio-error a {
+    color: #378ADD;
+}
+ 
+/* hidden class（已存在，確保也包含此項） */
+/* .hidden { opacity: 0; transform: translateY(30px) scale(0.9); pointer-events: none; } */
+/* 原有的 .hidden 是給 anime panel 用的，bio-view 需要 display:none 效果 */
+/* 所以在 JS 中用 classList 的 hidden 配合以下規則 */
+#main-view.hidden,
+#bio-view.hidden {
+    display: none;
+}
+ 
