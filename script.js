@@ -251,3 +251,81 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 10000);
     updateLanguage('zh');
 });
+
+// --- 新blog按鈕邏輯 ---
+function showBlog() {
+
+    document.getElementById("main-view")
+        .classList.add("hidden");
+
+    document.getElementById("blog-view")
+        .classList.remove("hidden");
+
+    loadBloggerPosts();
+}
+
+function hideBlog() {
+
+    document.getElementById("blog-view")
+        .classList.add("hidden");
+
+    document.getElementById("main-view")
+        .classList.remove("hidden");
+}
+
+function loadBloggerPosts() {
+
+    if(window.blogLoaded)
+        return;
+
+    window.blogLoaded = true;
+
+    const script =
+        document.createElement("script");
+
+    script.src =
+        "https://blog.salmonn.co.uk/feeds/posts/default?alt=json-in-script&callback=renderPosts";
+
+    document.body.appendChild(script);
+}
+
+function renderPosts(data) {
+
+    const container =
+        document.getElementById("blog-posts");
+
+    container.innerHTML = "";
+
+    data.feed.entry.forEach(post => {
+
+        const title = post.title.$t;
+
+        const link =
+            post.link.find(
+                l => l.rel === "alternate"
+            ).href;
+
+        const summary =
+            post.summary?.$t || "";
+
+        container.innerHTML += `
+            <div class="post-card">
+
+                <h3>${title}</h3>
+
+                <p>
+                    ${summary
+                        .replace(/<[^>]+>/g,'')
+                        .slice(0,120)}
+                </p>
+
+                <a href="${link}"
+                   target="_blank">
+
+                    閱讀全文 →
+                </a>
+
+            </div>
+        `;
+    });
+}
