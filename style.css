@@ -473,19 +473,4 @@ h1 {
 #bio-view.hidden {
     display: none;
 }
-
-/* blog post */
-#blog-posts {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.post-card {
-    text-align: left;
-}
-
-.post-card .sub-text {
-    margin-top: 8px;
-    line-height: 1.5;
-}
+ 
